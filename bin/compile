@@ -9,11 +9,13 @@ BIN_DIR=$BP_DIR/bin
 OPT_DIR=$BP_DIR/opt
 . $BIN_DIR/common
 
+source "${BIN_DIR}/../conf/${PAAS_VENDOR}-env.properties"
+
 # parse args
 BUILD_DIR=$(cd $1; pwd)
 CACHE_DIR=$2
 
-curl --silent --location http://heroku-jvm-common.s3.amazonaws.com/jvm-buildpack-common.tar.gz | tar xz
+curl --silent --location "${JVM_BUILDPACK_COMMON_URL}" | tar xz
 . bin/java
 
 #create the cache dir if it doesn't exist
@@ -70,7 +72,6 @@ SBT_VERSION="$(get_supported_sbt_version ${BUILD_DIR})"
 SBT_JAR="sbt-launch.jar"
 SBT_PROPS="sbt-$SBT_VERSION.boot.properties"
 SBT_URL="http://typesafe.artifactoryonline.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.0/$SBT_JAR"
-SBT_PROPS_URL="http://s3.amazonaws.com/heroku-jvm-langpack-scala/$SBT_PROPS"
 ## in 0.10 start-script will depend on package, if packaging
 ## is required - it may not be, we can run .class files or a package-war
 ## instead.
@@ -98,16 +99,12 @@ if [ ! -f "$SBT_BINDIR"/"$SBT_JAR" ]; then
   cd $BUILD_DIR
 fi
 
-if [ -f $OPT_DIR/$SBT_PROPS ]; then
-  cp $OPT_DIR/$SBT_PROPS $SBT_BINDIR/sbt.boot.properties
-else
-  error "Error, SBT version $SBT_VERSION not supported"
-fi
+curl --silent --max-time 60 --location $SCALA_DIST_URL/$SBT_PROPS --fail -o $SBT_BINDIR/sbt.boot.properties || error "Error, SBT version $SBT_VERSION not supported"
 
-# copy in heroku sbt plugin
-HEROKU_PLUGIN="HerokuPlugin.scala"
+# copy in paas sbt plugin
+PAAS_PLUGIN="PaasPlugin.scala"
 mkdir -p "$SBT_USER_HOME/.sbt/plugins"
-cp $OPT_DIR/$HEROKU_PLUGIN $SBT_USER_HOME/.sbt/plugins/$HEROKU_PLUGIN
+cp $OPT_DIR/$PAAS_PLUGIN $SBT_USER_HOME/.sbt/plugins/$PAAS_PLUGIN
 
 # build app
 echo "-----> Running: sbt $SBT_TASKS"
