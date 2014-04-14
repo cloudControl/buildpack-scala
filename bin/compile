@@ -100,8 +100,6 @@ if [ ! -f "$SBT_BINDIR"/"$SBT_JAR" ]; then
   cd $BUILD_DIR
 fi
 
-curl --silent --max-time 60 --location $SCALA_DIST_URL/$SBT_PROPS --fail -o $SBT_BINDIR/sbt.boot.properties || error "Error, SBT version $SBT_VERSION not supported"
-
 # copy in paas sbt plugin
 PAAS_PLUGIN="PaasPlugin.scala"
 mkdir -p "$SBT_USER_HOME/.sbt/plugins"
