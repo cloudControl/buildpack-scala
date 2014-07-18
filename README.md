@@ -19,9 +19,10 @@ Example usage:
     [...]
     
     -----> Receiving push
-    -----> Installing OpenJDK 1.6...
-    -----> Building app with sbt
-    -----> Running: sbt clean compile stage
+    -----> Installing OpenJDK 1.7...-----> Installing OpenJDK 1.7(openjdk7.b32.tar.gz)...
+    done
+    -----> Downloading SBT...done
+    -----> Running: sbt compile stage
             [...]
     -----> Building image
     -----> Uploading image (80M)
