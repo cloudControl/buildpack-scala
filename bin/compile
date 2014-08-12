@@ -101,9 +101,9 @@ echo "java  -Duser.home=/app/.sbt_home -Divy.default.ivy.user.dir=/app/.sbt_home
 chmod a+x $SBT_BINDIR/sbt
 
 # copy in paas sbt plugin
-PAAS_PLUGIN="PaasPlugin.scala"
-mkdir -p "$SBT_USER_HOME/.sbt/plugins"
-cp -p $OPT_DIR/$PAAS_PLUGIN $SBT_USER_HOME/.sbt/plugins/$PAAS_PLUGIN
+#PAAS_PLUGIN="PaasPlugin.scala"
+#mkdir -p "$SBT_USER_HOME/.sbt/plugins"
+#cp -p $OPT_DIR/$PAAS_PLUGIN $SBT_USER_HOME/.sbt/plugins/$PAAS_PLUGIN
 
 # download and cache the dependencies if this is the first build
 if [ ! -d "$SBT_USER_HOME/.ivy2" ]; then
