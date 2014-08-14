@@ -151,11 +151,10 @@ _download_and_unpack_ivy_cache() {
   local scalaVersion=$2
   local playVersion=$3
 
-  baseUrl="https://dl.dropboxusercontent.com/u/1935391/sbt-cache"
   if [ -n "$playVersion" ]; then
-    ivyCacheUrl="$baseUrl-play-${playVersion}_${scalaVersion}.tar.gz"
+    ivyCacheUrl="${SCALA_DIST_URL}/sbt-cache-play-${playVersion}.tar.gz"
   else
-    ivyCacheUrl="$baseUrl-base.tar.gz"
+    ivyCacheUrl="${SCALA_DIST_URL}/sbt-cache-base.tar.gz"
   fi
 
   curl --silent --max-time 60 --location $ivyCacheUrl | tar xzm -C $sbtUserHome
