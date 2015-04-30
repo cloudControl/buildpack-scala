@@ -119,17 +119,17 @@ for DIR in $CACHED_DIRS; do
   cache_copy $DIR $BUILD_DIR $CACHE_DIR
 done
 
-# drop useless directories from slug for play only
+# drop useless directories from container for play only
 if [ -d $SBT_USER_HOME/.ivy2 ]; then
-  echo "-----> Dropping ivy cache from the slug"
+  echo "-----> Dropping ivy cache from the container"
   rm -rf $SBT_USER_HOME/.ivy2
 fi
 if [ -d $BUILD_DIR/project/boot ] ; then
-  echo "-----> Dropping project boot dir from the slug"
+  echo "-----> Dropping project boot dir from the container"
   rm -rf $BUILD_DIR/project/boot
 fi
 if [ -d $BUILD_DIR/target ] ; then
-  echo "-----> Dropping compilation artifacts from the slug"
+  echo "-----> Dropping compilation artifacts from the container"
   rm -rf $BUILD_DIR/target/scala-*
   rm -rf $BUILD_DIR/target/streams
   rm -rf $BUILD_DIR/target/resolution-cache

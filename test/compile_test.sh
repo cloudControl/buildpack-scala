@@ -184,10 +184,10 @@ testCompile_Play20Project() {
   compile
   assertCapturedSuccess
   assertTrue  "Ivy2 cache should have been repacked for a play project." "[ -d ${CACHE_DIR}/.sbt_home/.ivy2 ]"
-  assertFalse "Ivy2 cache should not have been included in slug for a play project." "[ -d ${BUILD_DIR}/.sbt_home/.ivy2 ]"
-  assertFalse "Resolution cache should not have been included in slug for a play project." "[ -d ${BUILD_DIR}/target/resolution-cache ]"
-  assertFalse "Streams should not have been included in slug for a play project." "[ -d ${BUILD_DIR}/target/streams ]"
-  assertFalse "Scala cache should not have been included in slug for a play project." "[ -d ${BUILD_DIR}/target/scala-2.9.1 ]"
+  assertFalse "Ivy2 cache should not have been included in container for a play project." "[ -d ${BUILD_DIR}/.sbt_home/.ivy2 ]"
+  assertFalse "Resolution cache should not have been included in container for a play project." "[ -d ${BUILD_DIR}/target/resolution-cache ]"
+  assertFalse "Streams should not have been included in container for a play project." "[ -d ${BUILD_DIR}/target/streams ]"
+  assertFalse "Scala cache should not have been included in container for a play project." "[ -d ${BUILD_DIR}/target/scala-2.9.1 ]"
 }
 
 testCompile_WithNonDefaultVersion()
